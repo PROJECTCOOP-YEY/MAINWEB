@@ -8,11 +8,12 @@ const app = express();
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy",
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://www.gstatic.com https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.googleapis.com https://presidential-car-museum-default-rtdb.asia-southeast1.firebasedatabase.app; " +
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " +
-    "img-src 'self' data: blob:; " +
-    "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; " +
-    "connect-src 'self' https://*.firebaseio.com https://*.firebasedatabase.app https://presidential-car-museum-default-rtdb.asia-southeast1.firebasedatabase.app https://www.gstatic.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com https://www.googleapis.com; " +
+    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com https://www.gstatic.com https://cdnjs.cloudflare.com; " +
+    "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; " +
+    "img-src 'self' data: blob: https://*.googleapis.com https://*.gstatic.com; " +
+    "font-src 'self' https://cdnjs.cloudflare.com; " +
+    "connect-src 'self' https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com; " +
+    "frame-src 'self' https://www.google.com https://*.google.com; " +
     "frame-ancestors 'self'; " +
     "base-uri 'self'; " +
     "form-action 'self'"
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()");
   res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
   next();
 });
 
@@ -38,4 +40,5 @@ app.get("*", (req, res) => {
 // Start Server
 // =========================
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
