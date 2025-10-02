@@ -73,7 +73,7 @@
       animation: fadeOutDown 0.5s forwards;
     }
 
-    /* ✅ Mobile Responsive Adjustments */
+    /* Mobile Responsive Adjustments */
     @media (max-width: 640px) {
       #logo-container img {
         transform: translateY(0) scale(5);
@@ -94,29 +94,259 @@
         animation: logoToHeader 2s ease-in-out forwards;
       }
 
-      /* Content box adjusts to screen */
       #content-box {
         padding: 1rem;
         width: 90%;
       }
 
-      /* Stack role selection buttons vertically */
       #role-selection .flex {
         flex-direction: column;
         gap: 0.75rem;
       }
 
-      /* Inputs and buttons full width + better spacing */
       #info-form input,
       #info-form button {
         font-size: 0.9rem;
         padding: 0.6rem;
       }
     }
+
+    .section-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .logo {
+      width: 100%;
+      max-width: 8000px;
+      height: auto;
+      content-visibility: auto;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+
+    .game-image {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover .game-image {
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .play-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .play-button:hover::before {
+      left: 100%;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+      }
+    }
+
+    .play-button {
+      animation: pulse 2s infinite;
+    }
+
+    .header-scrolled {
+      background-color: rgba(107, 68, 35, 0.9) !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.6s ease;
+    }
+
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .fade-in-up,
+    .fade-in-left,
+    .fade-in-right,
+    .scale-in {
+      animation: fadeInFallback 0.6s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeInFallback {
+      to {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+      }
+    }
+
+    .delay-100 {
+      transition-delay: 0.1s;
+    }
+
+    .delay-200 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-300 {
+      transition-delay: 0.3s;
+    }
+
+    .delay-400 {
+      transition-delay: 0.4s;
+    }
+
+    .delay-500 {
+      transition-delay: 0.5s;
+    }
+
+    .parallax-bg {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .parallax-slow {
+      background-position: center center;
+      background-size: cover;
+      transform: translateZ(0);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-medium {
+      background-position: center 30%;
+      background-size: cover;
+      transform: translateZ(0);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-fast {
+      background-position: center 60%;
+      background-size: cover;
+      transform: translateZ(0);
+      position: relative;
+      overflow: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .parallax-bg,
+    .parallax-slow,
+    .parallax-medium,
+    .parallax-fast {
+      will-change: transform;
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+    
+    .section-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 
 <body class="bg-black text-white">
+  <!-- Landing Page -->
   <div id="landing" class="min-h-screen flex flex-col items-center justify-center text-white relative" 
     style="background-image: url('background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
@@ -172,162 +402,7 @@
     </div>
   </div>
 
-  <script>
-    const logo = document.getElementById("logo-container");
-    const contentBox = document.getElementById("content-box");
-    const infoForm = document.getElementById("info-form");
-    const roleSelection = document.getElementById("role-selection");
-    const backButton = document.getElementById("back-button");
-
-    // Animate logo then reveal content
-    document.addEventListener("DOMContentLoaded", () => {
-      logo.classList.add("animate");
-      const logoImg = document.querySelector('#logo-container img');
-      if (logoImg) {
-        logoImg.addEventListener('animationend', () => {
-          contentBox.classList.add('show');
-        }, { once: true });
-        setTimeout(() => {
-          if (!contentBox.classList.contains('show')) {
-            contentBox.classList.add('show');
-          }
-        }, 2000);
-      } else {
-        contentBox.classList.add('show');
-      }
-    });
-
-    function selectRole(role) {
-      document.getElementById("role").value = role;
-      roleSelection.classList.remove('form-animate-in');
-      roleSelection.classList.add('form-animate-out');
-      roleSelection.addEventListener('animationend', function handleRoleOut() {
-        roleSelection.removeEventListener('animationend', handleRoleOut);
-        roleSelection.classList.add('hidden');
-        infoForm.classList.remove('hidden');
-        infoForm.classList.remove('form-animate-out');
-        infoForm.classList.add('form-animate-in');
-        infoForm.style.opacity = 1;
-        backButton.classList.remove('hidden');
-      });
-    }
-
-    function goBack() {
-      infoForm.classList.remove("form-animate-in");
-      infoForm.classList.add("form-animate-out");
-      infoForm.addEventListener("animationend", function handleAnimEnd() {
-        infoForm.removeEventListener("animationend", handleAnimEnd);
-        infoForm.classList.add("hidden");
-        infoForm.style.opacity = 0;
-        roleSelection.classList.remove("hidden");
-        backButton.classList.add("hidden");
-      });
-    }
-  </script>
-</head>
-
-<body class="bg-black text-white">
-
-  <div id="landing" class="min-h-screen flex flex-col items-center justify-center text-white relative" style="background-image: url('background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div id="logo-container" class="text-center">
-      <img src="Final Logo.png" alt="Bridging History Logo" class="mx-auto w-40 h-auto">
-    </div>
-
-    <div id="content-box" >
-  
-      <div id="role-selection" class="flex flex-col items-center gap-4 mb-6">
-        <p class="mb-2 font-bold text-center">
-          Please select purpose:
-        </p>
-        <div class="flex gap-4">
-          <button onclick="selectRole('students')" class="bg-white text-amber-700 px-4 py-2 rounded-lg hover:bg-amber-200 font-bold">
-            Education
-          </button>
-          <button onclick="selectRole('visitors')" class="bg-white text-amber-700 px-4 py-2 rounded-lg hover:bg-amber-200 font-bold">
-            Visit
-          </button>
-        </div>
-      </div>
-      
-      <form id="info-form" class="hidden space-y-4 text-center max-w-md w-full p-8 bg-black/65 rounded-xl shadow-xl">
-        <p class="mb-2 font-bold text-center">
-          Log-in
-        </p>
-        <input type="hidden" id="role" name="role">
-        <div>
-          <input type="text" id="nickname" name="nickname" placeholder="Enter nickname" class="w-full px-3 py-2 rounded text-black" required>
-        </div>
-        <div>
-          <input type="text" id="location" name="location" placeholder="Enter location" class="w-full px-3 py-2 rounded text-black" required>
-        </div>
-        <div>
-          <input type="datetime-local" id="visit_time" name="visit_time" class="w-full px-3 py-2 rounded text-black" required>
-        </div>
-        <button type="submit" class="bg-white text-amber-700 px-4 py-2 rounded-lg hover:bg-amber-200 w-full">Enter</button>
-        <button id="back-button" onclick="goBack()" class="hidden mt-4 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg w-full transition-all">
-          <i class="fas fa-arrow-left mr-2"></i>Back
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    const logo = document.getElementById("logo-container");
-    const contentBox = document.getElementById("content-box");
-    const infoForm = document.getElementById("info-form");
-    const roleSelection = document.getElementById("role-selection");
-    const backButton = document.getElementById("back-button");
-
-    // Animate logo, then reveal content box after animation completes
-    document.addEventListener("DOMContentLoaded", () => {
-      logo.classList.add("animate");
-      const logoImg = document.querySelector('#logo-container img');
-      if (logoImg) {
-        logoImg.addEventListener('animationend', () => {
-          contentBox.classList.add('show');
-        }, { once: true });
-        // Fallback in case animationend doesn't fire
-        setTimeout(() => {
-          if (!contentBox.classList.contains('show')) {
-            contentBox.classList.add('show');
-          }
-        }, 2000);
-      } else {
-        contentBox.classList.add('show');
-      }
-    });
-
-    function selectRole(role) {
-      document.getElementById("role").value = role;
-      // animate out role selection first, then show form smoothly
-      roleSelection.classList.remove('form-animate-in');
-      roleSelection.classList.add('form-animate-out');
-      roleSelection.addEventListener('animationend', function handleRoleOut() {
-        roleSelection.removeEventListener('animationend', handleRoleOut);
-        roleSelection.classList.add('hidden');
-        // animate in form
-        infoForm.classList.remove('hidden');
-        infoForm.classList.remove('form-animate-out');
-        infoForm.classList.add('form-animate-in');
-        infoForm.style.opacity = 1;
-        backButton.classList.remove('hidden');
-      });
-    }
-
-    function goBack() {
-      // animate out form
-      infoForm.classList.remove("form-animate-in");
-      infoForm.classList.add("form-animate-out");
-      infoForm.addEventListener("animationend", function handleAnimEnd() {
-        infoForm.removeEventListener("animationend", handleAnimEnd);
-        infoForm.classList.add("hidden");
-        infoForm.style.opacity = 0;
-        roleSelection.classList.remove("hidden");
-        backButton.classList.add("hidden");
-      });
-    }
-  </script>
-
+  <!-- Main Site -->
   <div id="main-site" style="display:none;">
     <header class="bg-[#6b4423] shadow-md py-4 px-6 sticky top-0 z-50" id="main-header">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
@@ -355,239 +430,6 @@
         <div class="logo-container">
           <img src="Final Logo.png" class="logo" alt="Bridging History Logo">
         </div>
-        <style>
-          .section-bg {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-          }
-
-          .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-          }
-
-          .logo {
-            width: 100%;
-            max-width: 8000px;
-            height: auto;
-            content-visibility: auto;
-          }
-
-          .game-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1rem;
-          }
-
-          .game-image {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease;
-          }
-
-          .game-card:hover .game-image {
-            transform: scale(1.05);
-          }
-
-          .play-button {
-            position: relative;
-            overflow: hidden;
-          }
-
-          .play-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-          }
-
-          .play-button:hover::before {
-            left: 100%;
-          }
-
-          @keyframes pulse {
-            0% {
-              box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
-            }
-            70% {
-              box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
-            }
-            100% {
-              box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
-            }
-          }
-
-          .play-button {
-            animation: pulse 2s infinite;
-          }
-
-          .header-scrolled {
-            background-color: rgba(107, 68, 35, 0.9) !important;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-          }
-
-          .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-          }
-
-          .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-
-          .fade-in-left {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.6s ease;
-          }
-
-          .fade-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-          }
-
-          .fade-in-right {
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.6s ease;
-          }
-
-          .fade-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-          }
-
-          .scale-in {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.6s ease;
-          }
-
-          .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
-          }
-
-          .fade-in-up,
-          .fade-in-left,
-          .fade-in-right,
-          .scale-in {
-            animation: fadeInFallback 0.6s ease forwards;
-            animation-delay: 1s;
-          }
-
-          @keyframes fadeInFallback {
-            to {
-              opacity: 1;
-              transform: translateY(0) translateX(0) scale(1);
-            }
-          }
-
-          .delay-100 {
-            transition-delay: 0.1s;
-          }
-
-          .delay-200 {
-            transition-delay: 0.2s;
-          }
-
-          .delay-300 {
-            transition-delay: 0.3s;
-          }
-
-          .delay-400 {
-            transition-delay: 0.4s;
-          }
-
-          .delay-500 {
-            transition-delay: 0.5s;
-          }
-
-          .parallax-bg {
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-            overflow: hidden;
-          }
-
-          .parallax-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: inherit;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            transform: translateZ(0);
-            will-change: transform;
-          }
-
-          .parallax-slow {
-            background-position: center center;
-            background-size: cover;
-            transform: translateZ(0);
-            position: relative;
-            overflow: hidden;
-          }
-
-          .parallax-medium {
-            background-position: center 30%;
-            background-size: cover;
-            transform: translateZ(0);
-            position: relative;
-            overflow: hidden;
-          }
-
-          .parallax-fast {
-            background-position: center 60%;
-            background-size: cover;
-            transform: translateZ(0);
-            position: relative;
-            overflow: hidden;
-          }
-
-          html {
-            scroll-behavior: smooth;
-          }
-
-          .parallax-bg,
-          .parallax-slow,
-          .parallax-medium,
-          .parallax-fast {
-            will-change: transform;
-            backface-visibility: hidden;
-            perspective: 1000px;
-          }
-          
-          .section-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-          }
-
-          .section-content {
-            position: relative;
-            z-index: 1;
-          }
-        </style>
       </section>
 
       <section id="about" class="parallax-medium py-20" style="background-image: url('about.png')">
@@ -663,7 +505,7 @@
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+              </iframe>
             </div>
           </div>
         </div>
@@ -678,15 +520,15 @@
           </div>
           <div class="w-full max-w-4xl mx-auto">
             <div class="game-card transform transition hover:scale-102 relative group scale-in">
-            <div class="aspect-w-16 aspect-h-9">
-              <img src="vr simulation.png" alt="Time Traveler's Journey Game" class="game-image rounded-xl shadow-2xl" loading="lazy" decoding="async">
+              <div class="aspect-w-16 aspect-h-9">
+                <img src="vr simulation.png" alt="Time Traveler's Journey Game" class="game-image rounded-xl shadow-2xl" loading="lazy" decoding="async">
               </div>
               <div class="game-overlay absolute inset-0 bg-black/40 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <a href="https://drive.google.com/file/d/1SDEc86-jInoXJlY26WLgOvjVbcSM2CFn/view?usp=sharing" target="_blank"
-               class="play-button bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full text-xl font-bold shadow-2xl transform hover:scale-110 transition-all duration-300 flex items-center gap-3">
-                 <i class="fas fa-play text-2xl"></i> PLAY NOW
+                   class="play-button bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full text-xl font-bold shadow-2xl transform hover:scale-110 transition-all duration-300 flex items-center gap-3">
+                  <i class="fas fa-play text-2xl"></i> PLAY NOW
                 </a>
-          </div>
+              </div>
             </div>
             <div class="mt-12 bg-white p-8 rounded-xl shadow-2xl transform transition hover:-translate-y-2 fade-in-up delay-200">
               <h3 class="text-3xl font-bold mb-6 text-amber-700 text-center">Time Traveler's Journey</h3>
@@ -729,49 +571,49 @@
           </div>
         </div>
       </section>
-    
 
-    <section class="bg-[#411900] py-20">
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-amber-100 mb-4">PROJECT-COOP</h2>
-          <div class="w-24 h-1 bg-amber-400 mx-auto"></div>
-          <p class="text-amber-100 max-w-2xl mx-auto mt-4"> Progress </p>
-        </div>
-        <div class="max-w-6xl mx-auto">
-          <div class="relative bg-black/20 rounded-xl p-6">
-            <div class="relative mb-6">
-              <img id="gallery-image" src="10.png" alt="System Progress" class="w-full h-96 object-cover rounded-lg shadow-2xl">
-              <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-full shadow-lg transition-all">
-                <i class="fas fa-chevron-left text-xl"></i>
-              </button>
-              <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-full shadow-lg transition-all">
-                <i class="fas fa-chevron-right text-xl"></i>
-              </button>
+      <section class="bg-[#411900] py-20">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-amber-100 mb-4">PROJECT-COOP</h2>
+            <div class="w-24 h-1 bg-amber-400 mx-auto"></div>
+            <p class="text-amber-100 max-w-2xl mx-auto mt-4"> Progress </p>
+          </div>
+          <div class="max-w-6xl mx-auto">
+            <div class="relative bg-black/20 rounded-xl p-6">
+              <div class="relative mb-6">
+                <img id="gallery-image" src="10.png" alt="System Progress" class="w-full h-96 object-cover rounded-lg shadow-2xl">
+                <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-full shadow-lg transition-all">
+                  <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-full shadow-lg transition-all">
+                  <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+              </div>
+              <div class="flex justify-center space-x-2 mb-4">
+                <div id="progress-0" class="w-3 h-3 bg-amber-400 rounded-full cursor-pointer transition-all"></div>
+                <div id="progress-1" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
+                <div id="progress-2" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
+                <div id="progress-3" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
+                <div id="progress-4" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
+              </div>
+              <div class="text-center text-amber-100">
+                <h3 id="image-title" class="text-xl font-semibold mb-2">System Development Phase 1</h3>
+                <p id="image-description" class="text-sm">Initial concept and design phase of the Presidential Car Museum virtual experience.</p>
+              </div>
             </div>
-            <div class="flex justify-center space-x-2 mb-4">
-              <div id="progress-0" class="w-3 h-3 bg-amber-400 rounded-full cursor-pointer transition-all"></div>
-              <div id="progress-1" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
-              <div id="progress-2" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
-              <div id="progress-3" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
-              <div id="progress-4" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all"></div>
-            </div>
-            <div class="text-center text-amber-100">
-              <h3 id="image-title" class="text-xl font-semibold mb-2">System Development Phase 1</h3>
-              <p id="image-description" class="text-sm">Initial concept and design phase of the Presidential Car Museum virtual experience.</p>
+            <div class="mt-6 grid grid-cols-5 gap-2">
+              <img src="step 1.png" alt="Phase 1" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-amber-400 opacity-100" data-index="0">
+              <img src="step 2.png" alt="Phase 2" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="1">
+              <img src="step 3.png" alt="Phase 3" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="2">
+              <img src="step 4.png" alt="Phase 4" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="3">
+              <img src="step 5.png" alt="Phase 5" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="4">
             </div>
           </div>
-          <div class="mt-6 grid grid-cols-5 gap-2">
-            <img src="step 1.png" alt="Phase 1" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-amber-400 opacity-100" data-index="0">
-            <img src="step 2.png" alt="Phase 2" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="1">
-            <img src="step 3.png" alt="Phase 3" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="2">
-            <img src="step 4.png" alt="Phase 4" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="3">
-            <img src="step 5.png" alt="Phase 5" class="thumbnail w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100" data-index="4">
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </main>
+
     <footer class="parallax-medium pt-20 pb-10" style="background-image: url('footing.png')">
       <div class="section-overlay bg-gray-800/90"></div>
       <div class="section-content max-w-7xl mx-auto px-6">
@@ -791,7 +633,7 @@
                 <a href="https://instagram.com/yourprofile" target="_blank" class="text-gray-300 hover:text-white text-xl transition">
                   <i class="fab fa-instagram"></i>
                 </a>
-                </div>
+              </div>
             </div>
           </section>
           <div>
@@ -826,134 +668,179 @@
         </div>
       </div>
     </footer>
+
     <a href="#home" id="back-to-top" class="fixed bottom-8 right-8 bg-amber-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg transform transition hover:scale-110 hidden">
       <i class="fas fa-arrow-up"></i>
     </a>
-    <script>
-      // Gallery functionality
-      const galleryImages = [
-        {
-          src: 'step 1.png',
-          title: 'System Development Phase 1',
-          description: 'Initial concept and design phase of the Presidential Car Museum virtual experience.'
-        },
-        {
-          src: 'step 2.png',
-          title: 'System Development Phase 2',
-          description: 'Museum design and navigation system implementation.'
-        },
-        {
-          src: 'step 3.png',
-          title: 'System Development Phase 3',
-          description: 'Modeling of the presidential cars.'
-        },
-        {
-          src: 'step 4.png',
-          title: 'System Development Phase 4',
-          description: '3D car models and virtual museum environment creation.'
-        },
-        {
-          src: 'step 5.png',
-          title: 'System Development Phase 5',
-          description: 'VR simulation integration and final testing phase.'
-        }
-      ];
-    
-      let currentIndex = 0;
-    
-      function updateGallery(index) {
-        const image = document.getElementById('gallery-image');
-        const title = document.getElementById('image-title');
-        const description = document.getElementById('image-description');
-    
-        // Update content
-        image.src = galleryImages[index].src;
-        title.textContent = galleryImages[index].title;
-        description.textContent = galleryImages[index].description;
-    
-        // Update progress indicators
-        for (let i = 0; i < galleryImages.length; i++) {
-          const progress = document.getElementById(`progress-${i}`);
-          if (i === index) {
-            progress.className = 'w-3 h-3 bg-amber-400 rounded-full cursor-pointer transition-all';
-          } else {
-            progress.className = 'w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all';
+  </div>
+
+  <!-- Landing Page Scripts -->
+  <script>
+    const logo = document.getElementById("logo-container");
+    const contentBox = document.getElementById("content-box");
+    const infoForm = document.getElementById("info-form");
+    const roleSelection = document.getElementById("role-selection");
+    const backButton = document.getElementById("back-button");
+
+    // Animate logo then reveal content
+    document.addEventListener("DOMContentLoaded", () => {
+      logo.classList.add("animate");
+      const logoImg = document.querySelector('#logo-container img');
+      if (logoImg) {
+        logoImg.addEventListener('animationend', () => {
+          contentBox.classList.add('show');
+        }, { once: true });
+        setTimeout(() => {
+          if (!contentBox.classList.contains('show')) {
+            contentBox.classList.add('show');
           }
-        }
-    
-        // Update thumbnails
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        thumbnails.forEach((thumb, i) => {
-          if (i === index) {
-            thumb.classList.add('border-amber-400', 'opacity-100');
-            thumb.classList.remove('border-transparent', 'opacity-70');
-          } else {
-            thumb.classList.add('border-transparent', 'opacity-70');
-            thumb.classList.remove('border-amber-400', 'opacity-100');
-          }
-        });
-    
-        currentIndex = index;
+        }, 3000);
+      } else {
+        contentBox.classList.add('show');
       }
-    
-      // Next / Prev buttons
-      document.getElementById('next-btn').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % galleryImages.length;
-        updateGallery(currentIndex);
+    });
+
+    function selectRole(role) {
+      document.getElementById("role").value = role;
+      roleSelection.classList.remove('form-animate-in');
+      roleSelection.classList.add('form-animate-out');
+      roleSelection.addEventListener('animationend', function handleRoleOut() {
+        roleSelection.removeEventListener('animationend', handleRoleOut);
+        roleSelection.classList.add('hidden');
+        infoForm.classList.remove('hidden');
+        infoForm.classList.remove('form-animate-out');
+        infoForm.classList.add('form-animate-in');
+        infoForm.style.opacity = 1;
+        backButton.classList.remove('hidden');
       });
-    
-      document.getElementById('prev-btn').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-        updateGallery(currentIndex);
+    }
+
+    function goBack() {
+      infoForm.classList.remove("form-animate-in");
+      infoForm.classList.add("form-animate-out");
+      infoForm.addEventListener("animationend", function handleAnimEnd() {
+        infoForm.removeEventListener("animationend", handleAnimEnd);
+        infoForm.classList.add("hidden");
+        infoForm.style.opacity = 0;
+        roleSelection.classList.remove("hidden");
+        backButton.classList.add("hidden");
       });
-    
-      // Progress dots click
+    }
+  </script>
+
+  <!-- Gallery Script -->
+  <script>
+    const galleryImages = [
+      {
+        src: 'step 1.png',
+        title: 'System Development Phase 1',
+        description: 'Initial concept and design phase of the Presidential Car Museum virtual experience.'
+      },
+      {
+        src: 'step 2.png',
+        title: 'System Development Phase 2',
+        description: 'Museum design and navigation system implementation.'
+      },
+      {
+        src: 'step 3.png',
+        title: 'System Development Phase 3',
+        description: 'Modeling of the presidential cars.'
+      },
+      {
+        src: 'step 4.png',
+        title: 'System Development Phase 4',
+        description: '3D car models and virtual museum environment creation.'
+      },
+      {
+        src: 'step 5.png',
+        title: 'System Development Phase 5',
+        description: 'VR simulation integration and final testing phase.'
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function updateGallery(index) {
+      const image = document.getElementById('gallery-image');
+      const title = document.getElementById('image-title');
+      const description = document.getElementById('image-description');
+
+      image.src = galleryImages[index].src;
+      title.textContent = galleryImages[index].title;
+      description.textContent = galleryImages[index].description;
+
       for (let i = 0; i < galleryImages.length; i++) {
-        document.getElementById(`progress-${i}`).addEventListener('click', () => {
-          updateGallery(i);
+        const progress = document.getElementById(`progress-${i}`);
+        if (i === index) {
+          progress.className = 'w-3 h-3 bg-amber-400 rounded-full cursor-pointer transition-all';
+        } else {
+          progress.className = 'w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all';
+        }
+      }
+
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      thumbnails.forEach((thumb, i) => {
+        if (i === index) {
+          thumb.classList.add('border-amber-400', 'opacity-100');
+          thumb.classList.remove('border-transparent', 'opacity-70');
+        } else {
+          thumb.classList.add('border-transparent', 'opacity-70');
+          thumb.classList.remove('border-amber-400', 'opacity-100');
+        }
+      });
+
+      currentIndex = index;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const nextBtn = document.getElementById('next-btn');
+      const prevBtn = document.getElementById('prev-btn');
+      
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % galleryImages.length;
+          updateGallery(currentIndex);
         });
       }
-    
-      // Thumbnail click
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+          updateGallery(currentIndex);
+        });
+      }
+
+      for (let i = 0; i < galleryImages.length; i++) {
+        const progress = document.getElementById(`progress-${i}`);
+        if (progress) {
+          progress.addEventListener('click', () => {
+            updateGallery(i);
+          });
+        }
+      }
+
       document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
         thumb.addEventListener('click', () => {
           updateGallery(i);
         });
       });
-    
-      // Initialize first image
+
       updateGallery(0);
-    </script>
-    
-  </div>
-  
+    });
+  </script>
+
+  <!-- Mobile Menu Toggle -->
   <script>
-    (function() {
-      const form = document.getElementById('info-form');
-      if (!form) return;
-      if (form.dataset.bound === 'true') return;
-      form.addEventListener('submit', function(e) {
-        try {
-          setTimeout(() => {
-            const landing = document.getElementById('landing');
-            const main = document.getElementById('main-site');
-            if (landing && main && main.style.display !== 'block') {
-              landing.style.display = 'none';
-              main.style.display = 'block';
-              window.scrollTo({ top: 0 });
-            }
-          }, 0);
-        } catch (_) {
-          const landing = document.getElementById('landing');
-          const main = document.getElementById('main-site');
-          if (landing && main) {
-            landing.style.display = 'none';
-            main.style.display = 'block';
-          }
-        }
-      });
-      form.dataset.bound = 'true';
-    })();
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    });
   </script>
 
   <!-- SECURITY LAYER - Load BEFORE Firebase -->
@@ -961,14 +848,8 @@
 
   <!-- Firebase Module Script -->
   <script type="module">
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import {
-      getDatabase,
-      ref,
-      push
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
     
     const firebaseConfig = {
       apiKey: "AIzaSyB3xZaZjQrNRODplN6mXhAzDTHqmRcxYHk",
@@ -1008,13 +889,16 @@
       const location = document.getElementById("location").value;
       const visit_time = document.getElementById("visit_time").value;
       
+      // Hide landing and show main site with forced scroll to top
       document.getElementById("landing").style.display = "none";
       document.getElementById("main-site").style.display = "block";
-      window.scrollTo({ top: 0 });
+      
+      // Force scroll to top with multiple methods
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
 
-      document.getElementById('main-site').style.display = 'block';
-      document.getElementById('landing').style.display = 'none';
-
+      // Trigger animations after a short delay
       setTimeout(() => {
         const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in');
         animatedElements.forEach(el => {
@@ -1022,18 +906,16 @@
         });
       }, 100);
       
+      // Save to Firebase
       push(ref(database, selectedRole), {
-          nickname,
-          location,
-          visit_time,
-          timestamp: new Date().toISOString()
-        })
-        .then(() => console.log("Data saved"))
-        .catch(err => console.error("Firebase error", err));
+        nickname,
+        location,
+        visit_time,
+        timestamp: new Date().toISOString()
+      })
+      .then(() => console.log("Data saved"))
+      .catch(err => console.error("Firebase error", err));
     });
   </script>
 </body>
-
 </html>
-
-
