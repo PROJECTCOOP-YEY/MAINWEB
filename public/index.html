@@ -847,75 +847,84 @@
   <script src="security.js"></script>
 
   <!-- Firebase Module Script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
-    
-    const firebaseConfig = {
-      apiKey: "AIzaSyB3xZaZjQrNRODplN6mXhAzDTHqmRcxYHk",
-      authDomain: "presidential-car-museum.firebaseapp.com",
-      databaseURL: "https://presidential-car-museum-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "presidential-car-museum",
-      storageBucket: "presidential-car-museum.appspot.com",
-      messagingSenderId: "888401660663",
-      appId: "1:888401660663:web:82b179145c73decfec21f2",
-      measurementId: "G-7PWEKQW7ZE"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    let selectedRole = "";
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-    window.selectRole = function(role) {
-      selectedRole = role;
-      document.getElementById("role").value = role;
-      const now = new Date();
-      document.getElementById("visit_time").value = now.toISOString().slice(0, 16);
-      document.getElementById("role-selection").classList.add("hidden");
-      document.getElementById("info-form").classList.remove("hidden");
-      document.getElementById("back-button").classList.remove("hidden");
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyB3xZaZjQrNRODplN6mXhAzDTHqmRcxYHk",
+    authDomain: "presidential-car-museum.firebaseapp.com",
+    databaseURL: "https://presidential-car-museum-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "presidential-car-museum",
+    storageBucket: "presidential-car-museum.appspot.com",
+    messagingSenderId: "888401660663",
+    appId: "1:888401660663:web:82b179145c73decfec21f2",
+    measurementId: "G-7PWEKQW7ZE"
+  };
 
-    window.goBack = function() {
-      document.getElementById("role-selection").classList.remove("hidden");
-      document.getElementById("info-form").classList.add("hidden");
-      document.getElementById("back-button").classList.add("hidden");
-      document.getElementById("info-form").reset();
-    };
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
 
-    document.getElementById("info-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const nickname = document.getElementById("nickname").value;
-      const location = document.getElementById("location").value;
-      const visit_time = document.getElementById("visit_time").value;
-      
-      // Hide landing and show main site with forced scroll to top
-      document.getElementById("landing").style.display = "none";
-      document.getElementById("main-site").style.display = "block";
-      
-      // Force scroll to top with multiple methods
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
+  // ✅ Anonymous Auth to satisfy "auth != null" in your Firebase rules
+  const auth = getAuth();
+  signInAnonymously(auth)
+    .then(() => console.log("✅ Signed in anonymously"))
+    .catch(err => console.error("Auth error:", err));
 
-      // Trigger animations after a short delay
-      setTimeout(() => {
-        const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in');
-        animatedElements.forEach(el => {
-          el.classList.add('visible');
-        });
-      }, 100);
-      
-      // Save to Firebase
-      push(ref(database, selectedRole), {
-        nickname,
-        location,
-        visit_time,
-        timestamp: new Date().toISOString()
-      })
-      .then(() => console.log("Data saved"))
+  let selectedRole = "";
+
+  window.selectRole = function(role) {
+    selectedRole = role;
+    document.getElementById("role").value = role;
+    const now = new Date();
+    document.getElementById("visit_time").value = now.toISOString().slice(0, 16);
+    document.getElementById("role-selection").classList.add("hidden");
+    document.getElementById("info-form").classList.remove("hidden");
+    document.getElementById("back-button").classList.remove("hidden");
+  };
+
+  window.goBack = function() {
+    document.getElementById("role-selection").classList.remove("hidden");
+    document.getElementById("info-form").classList.add("hidden");
+    document.getElementById("back-button").classList.add("hidden");
+    document.getElementById("info-form").reset();
+  };
+
+  document.getElementById("info-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const nickname = document.getElementById("nickname").value;
+    const location = document.getElementById("location").value;
+    const visit_time = document.getElementById("visit_time").value;
+
+    // Hide landing and show main site
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("main-site").style.display = "block";
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: "instant" });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+    // Trigger animations
+    setTimeout(() => {
+      const animatedElements = document.querySelectorAll(
+        ".fade-in-up, .fade-in-left, .fade-in-right, .scale-in"
+      );
+      animatedElements.forEach(el => el.classList.add("visible"));
+    }, 100);
+
+    // ✅ Save to Firebase (under "students" or "visitors" depending on role)
+    push(ref(database, selectedRole), {
+      nickname,
+      location,
+      visit_time,
+      timestamp: new Date().toISOString()
+    })
+      .then(() => console.log("✅ Data saved"))
       .catch(err => console.error("Firebase error", err));
-    });
+  });
   </script>
 </body>
 </html>
+
