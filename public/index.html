@@ -843,6 +843,13 @@
     });
   </script>
 
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const visitInput = document.getElementById("visit_time");
+    visitInput.value = ""; // make it blank so user must pick
+  });
+</script>
+
   <!-- SECURITY LAYER - Load BEFORE Firebase -->
   <script src="security.js"></script>
 
@@ -927,5 +934,6 @@
   </script>
 </body>
 </html>
+
 
 
